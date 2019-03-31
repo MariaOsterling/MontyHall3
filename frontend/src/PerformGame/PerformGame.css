@@ -1,0 +1,19 @@
+.PerformGame {
+    background-color: antiquewhite;
+    padding: 50px
+}
+
+.PerformGameOLD {
+    background-color: antiquewhite;
+    padding: 50px;
+    margin: 50px
+}
+
+.button {
+    font-size: 18px;
+    color: maroon;
+
+}
+.gameComponents {
+    padding: 10px;
+}
