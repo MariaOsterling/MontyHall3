@@ -8,14 +8,10 @@ import java.util.List;
 @Service
 public class MontyHallService {
 
-    private List<Boolean> board;
-    private int chosenDoor;
-    private int definitelyGoat;
-
-    @Autowired
-    private Generator generator;
-
-    public int getNoOfCarsWon(int noOfGames, boolean changeDoor) {
+    public int getNoOfCarsWon(int noOfGames, boolean changeDoor, Generator generator) {
+        List<Boolean> board;
+        int chosenDoor=0;
+        int definitelyGoat=0;
         int numberOfCarsWon = 0;
 
         System.out.println("Service called with: " + noOfGames + " " + changeDoor);
@@ -24,7 +20,7 @@ public class MontyHallService {
             chosenDoor = generator.chooseDoor();
             definitelyGoat = generator.selectOneWithGoat();
 
-            boolean res = isCarBehindTheDoor(changeDoor);
+            boolean res = isCarBehindTheDoor(changeDoor, board, chosenDoor, definitelyGoat);
 
             System.out.println("Is car behind the door: " + res);
             if (res) {
@@ -34,7 +30,7 @@ public class MontyHallService {
         return numberOfCarsWon;
     }
 
-    private boolean isCarBehindTheDoor(boolean changeDoor){
+    private boolean isCarBehindTheDoor(boolean changeDoor, List<Boolean> board, int chosenDoor, int definitelyGoat){
 
         if (changeDoor) {
             return (!board.get(chosenDoor) && !board.get(definitelyGoat));

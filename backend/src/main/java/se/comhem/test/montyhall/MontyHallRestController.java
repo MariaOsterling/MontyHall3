@@ -8,10 +8,12 @@ public class MontyHallRestController {
 
     @Autowired
     private MontyHallService service;
+    @Autowired
+    private Generator generator;
 
     @RequestMapping(value="/checkresult/", method = RequestMethod.GET)
     public int checkResult(@RequestParam("number") int number, @RequestParam("changeDoor") boolean changeDoor) {
-        return service.getNoOfCarsWon(number, changeDoor);
+        return service.getNoOfCarsWon(number, changeDoor, generator);
     }
 
 }

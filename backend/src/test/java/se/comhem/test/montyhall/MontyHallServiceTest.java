@@ -18,18 +18,17 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class MontyHallServiceTest {
 
+    private final static boolean CHANGE_DOOR = true;
+    private final static boolean KEEP_DOOR = false;
+
     @InjectMocks
     private MontyHallService service;
-
-    int noOfIterations;
-
 
     @Mock
     Generator generator;
 
     @Before
     public void setUp() {
-        noOfIterations = 3;
 
         List<Boolean> board = new ArrayList<>();
             board.add(true);
@@ -43,21 +42,27 @@ public class MontyHallServiceTest {
 
     @Test
     public void shouldReturnOneCarWonWhenChange() {
-        assertEquals(1, service.getNoOfCarsWon(1, true));
+        int noOfGames = 1;
+        assertEquals(noOfGames, service.getNoOfCarsWon(noOfGames, CHANGE_DOOR, generator));
     }
 
     @Test
     public void shouldReturnNoCarsWonWhenNotChange() {
-        assertEquals(0, service.getNoOfCarsWon(1, false));
+        int noOfGames = 1;
+        int expectedResult = 0;
+        assertEquals(expectedResult, service.getNoOfCarsWon(noOfGames, KEEP_DOOR, generator));
     }
 
     @Test
     public void shouldReturn10CarWonWhenChange10Tries() {
-        assertEquals(10, service.getNoOfCarsWon(10, true));
+        int noOfGames = 10;
+        assertEquals(noOfGames, service.getNoOfCarsWon(noOfGames, CHANGE_DOOR, generator));
     }
 
     @Test
     public void shouldReturnNoCarsWonWhenNotChange20Tries() {
-        assertEquals(0, service.getNoOfCarsWon(20, false));
+        int noOfGames = 20;
+        int expectedResult = 0;
+        assertEquals(expectedResult, service.getNoOfCarsWon(noOfGames, KEEP_DOOR, generator));
     }
 }

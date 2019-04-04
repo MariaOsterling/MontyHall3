@@ -8,6 +8,8 @@ import java.util.Random;
 
 @Component
 public class Generator {
+    private final static boolean CAR = true;
+    private final static boolean GOAT = false;
 
     private List<Boolean> board = new ArrayList<>();
     private  List<Integer> goatIndexes = new ArrayList();
@@ -15,15 +17,15 @@ public class Generator {
 
     public List<Boolean> setUpBoard() {
         board.clear();
-        board.add(false);
-        board.add(false);
-        board.add(false);
+        board.add(GOAT);
+        board.add(GOAT);
+        board.add(GOAT);
 
         carIndex = generateRandomInteger(0,3);
         System.out.println("Car index: " + carIndex);
         System.out.println("board size " + board.size());
 
-        board.set(carIndex, true);
+        board.set(carIndex, CAR);
 
         return board;
     }

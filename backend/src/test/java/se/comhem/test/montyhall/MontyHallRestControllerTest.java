@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static junit.framework.TestCase.*;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 
@@ -15,23 +16,33 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class MontyHallRestControllerTest {
 
+    private final static boolean CHANGE_DOOR = true;
+    private final static boolean KEEP_DOOR = false;
+
     @InjectMocks
     MontyHallRestController controller;
 
     @Mock
     MontyHallService service;
 
+    @Mock
+    Generator generator;
 
     @Test
     public void shouldReturn2WinsWhenChangeAnd20Tries() {
-        when(service.getNoOfCarsWon(20, true)).thenReturn(2);
-        assertEquals(2, controller.checkResult(20,true));
+        int noOfGames = 20;
+        int noOfCarsWon = 2;
+
+        when(service.getNoOfCarsWon(noOfGames, CHANGE_DOOR, generator)).thenReturn(noOfCarsWon);
+        assertEquals(noOfCarsWon, controller.checkResult(noOfGames,CHANGE_DOOR));
     }
 
     @Test
     public void shouldReturn0WinsWhenNoChange15Tries() {
-        when(service.getNoOfCarsWon(15, true)).thenReturn(0);
-        assertEquals(0, controller.checkResult(15,false));
+        int noOfGames = 15;
+        int noOfCarsWon = 0;
+        when(service.getNoOfCarsWon(noOfGames, KEEP_DOOR, generator)).thenReturn(noOfCarsWon);
+        assertEquals(noOfCarsWon, controller.checkResult(noOfGames,KEEP_DOOR));
     }
 
 }

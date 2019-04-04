@@ -1,15 +1,13 @@
 import React, {Component} from "react";
-import './PerformGame.css';
+
 
 class PresentResult extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            noOfCarsWon : props.noOfCarsWon,
+            noOfCarsWon : 1,
         };
-
-
     }
 
     render() {
@@ -19,5 +17,9 @@ class PresentResult extends Component {
             </div>
         );
     }
+}
+export function updateNoOfCarsWon() {
+    console.log("In updateNoOfCarsWon!!");
+    this.state.noOfCarsWon = 10;
 }
 export default PresentResult
